@@ -4,4 +4,7 @@ object MenuConst {
 
     const val DEVICE_UUID = "123456"
     const val API_VERSION = "3.7.0"
+
+    const val HEADER_DEVICE_UUID = "Device-UUID"
+    const val HEADER_API_VERSION = "Api-Version"
 }

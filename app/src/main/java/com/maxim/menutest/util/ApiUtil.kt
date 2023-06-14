@@ -1,23 +1,26 @@
 package com.maxim.menutest.util
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.runBlocking
 import retrofit2.HttpException
 
-object ApiUtil {
-
-    suspend fun <T> executeApiCall(
-        apiCall: suspend () -> T
-    ): Response<T> {
-        return withContext(Dispatchers.IO) {
-            try {
-                Response.Success(apiCall.invoke())
-            } catch (e: Exception) {
-                when (e) {
-                    is HttpException -> Response.Error(e.message(), e)
-                    else -> Response.Error(e.message ?: "Unknown error")
-                }
-            }
-        }
-    }
-}
+//suspend fun <T> executeApiCall(
+//    apiCall: suspend () -> ResponseInfo<T>
+//): Response<ResponseInfo<T>> {
+//    return runBlocking {
+//        try {
+////            Response.Success(apiCall.invoke())
+//        } catch (e: Exception) {
+//            when (e) {
+//                is HttpException -> {
+//                    val type = object : TypeToken<ResponseInfo<ErrorData>>() {}.type
+//                    val body = Gson().fromJson<ResponseInfo<ErrorData>>(e.response()?.errorBody()?.charStream(), type)
+//                    println(body)
+//                    Response.Error<ErrorData>()
+//                }
+////                else -> Response.Error(e.message ?: "")
+//            }
+//        }
+//    }
+//}

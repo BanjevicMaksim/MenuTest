@@ -6,6 +6,6 @@ import retrofit2.http.POST
 
 interface VenueService {
 
-    @POST("directory/search")
+    @POST("search")
     suspend fun getVenues(request: GetVenuesRequest): GetVenuesResponse
 }

@@ -1,12 +1,24 @@
 package com.maxim.menutest.util
 
-sealed class Response<T : Any?>(
-    val data: T? = null
-) {
-    class Loading<T : Any?>(data: T? = null) : Response<T>(data)
-    class Success<T : Any?>(data: T) : Response<T>(data)
+import com.google.gson.annotations.SerializedName
 
-    class Error<T : Any?>(message: String, val cause: Exception? = null, data: T? = null) :
-        Response<T>(data)
-
+sealed class Response<out T> {
+    data class Success<R>(val value: R) : Response<R>()
+    data class Error(val error: ErrorData? = null) : Response<Nothing>()
 }
+
+data class ResponseInfo<out T>(
+    val data: T,
+    val code: Int,
+    val status: String
+)
+
+class InfoMessage(
+    val title: String,
+    val body: String
+)
+
+data class ErrorData(
+    @SerializedName("info_message")
+    val infoMessage: InfoMessage,
+)

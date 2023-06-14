@@ -1,8 +1,8 @@
 package com.maxim.menutest.domain.repository
 
-import com.maxim.menutest.data.remote.response.LoginResponse
 import com.maxim.menutest.data.remote.response.GetVenuesResponse
-import com.maxim.menutest.util.Response
+import com.maxim.menutest.data.remote.response.LoginResponse
+import com.maxim.menutest.util.ResponseInfo
 
 /**
  * This should be represented ideally as two separate repos for
@@ -11,9 +11,9 @@ import com.maxim.menutest.util.Response
  */
 interface MenuRepository {
 
-    suspend fun getVenues(longitude: String, latitude: String): Response<GetVenuesResponse>
+    suspend fun getVenues(longitude: String, latitude: String): GetVenuesResponse
 
-    suspend fun loginUser(username: String, password: String): Response<LoginResponse>
+    suspend fun loginUser(username: String, password: String): ResponseInfo<LoginResponse>
 
     suspend fun removeUserToken()
 
