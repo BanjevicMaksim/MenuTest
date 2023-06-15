@@ -24,7 +24,7 @@ class MenuRepositoryImpl(
     override suspend fun getVenues(
         longitude: String,
         latitude: String
-    ): GetVenuesResponse =
+    ): ResponseInfo<GetVenuesResponse> =
         venuesApi.getVenues(
             GetVenuesRequest(
                 latitude, longitude

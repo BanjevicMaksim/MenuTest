@@ -5,9 +5,14 @@ import com.maxim.menutest.data.remote.LoginService
 import com.maxim.menutest.data.remote.VenueService
 import com.maxim.menutest.data.repository.MenuRepositoryImpl
 import com.maxim.menutest.domain.repository.MenuRepository
+import com.maxim.menutest.domain.use_case.GetVenuesUseCase
 import com.maxim.menutest.domain.use_case.LoginUseCase
+import com.maxim.menutest.domain.use_case.LogoutUseCase
 import com.maxim.menutest.domain.use_case.SaveUserTokenUseCase
 import com.maxim.menutest.ui.login.LoginViewModel
+import com.maxim.menutest.ui.venue.VenuesViewModel
+import com.maxim.menutest.ui.venue_details.VenueDetailsViewModel
+import com.maxim.menutest.util.ConnectivityCheckingInterceptor
 import com.maxim.menutest.util.MenuConst.API_VERSION
 import com.maxim.menutest.util.MenuConst.DEVICE_UUID
 import com.maxim.menutest.util.MenuConst.HEADER_API_VERSION
@@ -41,7 +46,9 @@ val appModule = module {
                         .addHeader("Content-Type", "application/json")
                         .build()
                 )
-            }).build()
+            })
+            .addInterceptor(ConnectivityCheckingInterceptor(androidContext()))
+            .build()
     }
 
     single<VenueService>(named(VENUE_SERVICE)) {
@@ -70,6 +77,7 @@ val appModule = module {
         MenuRepositoryImpl(get(named(VENUE_SERVICE)), get(named(LOGIN_SERVICE)), get())
     }
 
+    // USE CASE
     single {
         LoginUseCase(get())
     }
@@ -79,7 +87,24 @@ val appModule = module {
     }
 
     single {
-        LoginViewModel(get(), get())
+        GetVenuesUseCase(get())
+    }
+
+    single {
+        LogoutUseCase(get())
+    }
+
+    // VIEW MODEL
+    single {
+        LoginViewModel(get(), get(), get())
+    }
+
+    single {
+        VenuesViewModel(get())
+    }
+
+    single {
+        VenueDetailsViewModel(get())
     }
 }
 

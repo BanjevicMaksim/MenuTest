@@ -11,7 +11,7 @@ import com.maxim.menutest.util.ResponseInfo
  */
 interface MenuRepository {
 
-    suspend fun getVenues(longitude: String, latitude: String): GetVenuesResponse
+    suspend fun getVenues(longitude: String, latitude: String): ResponseInfo<GetVenuesResponse>
 
     suspend fun loginUser(username: String, password: String): ResponseInfo<LoginResponse>
 

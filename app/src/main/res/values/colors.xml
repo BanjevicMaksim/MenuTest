@@ -10,5 +10,5 @@
 
     <color name="menu_orange">#F2613D</color>
     <color name="menu_black">#2C2C31</color>
-    <color name="login_light_gray">#2C2C3133</color>
+    <color name="login_light_gray">#919191</color>
 </resources>

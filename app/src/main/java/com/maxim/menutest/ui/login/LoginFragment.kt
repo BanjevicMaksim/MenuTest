@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import com.maxim.menutest.R
 import com.maxim.menutest.ui.MainActivity
 import com.maxim.menutest.util.showError
@@ -27,8 +26,15 @@ class LoginFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeLiveData()
-        setOnClickListeners()
+        if (viewModel.isUserLoggedIn()) navigateToVenues()
+        else {
+            observeLiveData()
+            setOnClickListeners()
+        }
+    }
+
+    private fun navigateToVenues() {
+        activity?.findNavController(R.id.fcvNavContainer)?.navigate(R.id.action_loginFragment_to_venuesFragment)
     }
 
     private fun observeLiveData() {
@@ -41,12 +47,11 @@ class LoginFragment: Fragment() {
 
         viewModel.ldLoginSuccess.observe(viewLifecycleOwner) { token ->
             viewModel.saveUserToken(token)
-
-            activity?.findNavController(R.id.fcvNavContainer)?.navigate(R.id.action_loginFragment_to_venuesFragment)
+            navigateToVenues()
         }
 
         viewModel.ldLoginError.observe(viewLifecycleOwner) { message ->
-            showError(message)
+            activity?.showError(message)
         }
     }
 

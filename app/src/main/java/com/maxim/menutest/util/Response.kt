@@ -4,7 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 sealed class Response<out T> {
     data class Success<R>(val value: R) : Response<R>()
-    data class Error(val error: ErrorData? = null) : Response<Nothing>()
+    sealed class Error(open val error: ErrorData? = null) : Response<Nothing>() {
+        object EmptyFieldError : Error()
+        object UnknownError : Error()
+        object NoInternetError : Error()
+        data class HttpError(override val error: ErrorData? = null) : Error(error)
+    }
 }
 
 data class ResponseInfo<out T>(
