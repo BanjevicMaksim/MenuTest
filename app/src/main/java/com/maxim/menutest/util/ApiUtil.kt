@@ -10,7 +10,7 @@ import retrofit2.HttpException
 //): Response<ResponseInfo<T>> {
 //    return runBlocking {
 //        try {
-////            Response.Success(apiCall.invoke())
+//            Response.Success(apiCall.invoke())
 //        } catch (e: Exception) {
 //            when (e) {
 //                is HttpException -> {
@@ -19,7 +19,7 @@ import retrofit2.HttpException
 //                    println(body)
 //                    Response.Error<ErrorData>()
 //                }
-////                else -> Response.Error(e.message ?: "")
+//                else -> Response.Error(e.message ?: "")
 //            }
 //        }
 //    }

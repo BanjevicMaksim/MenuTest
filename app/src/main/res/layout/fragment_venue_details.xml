@@ -9,31 +9,41 @@
         android:id="@+id/tvVenueDetailsName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:textColor="@color/login_light_gray"
-        android:textSize="16sp"
+        android:layout_marginStart="30dp"
+        android:textColor="@color/menu_black"
+        android:textSize="22sp"
+        android:fontFamily="@font/circularstd_bold"
         app:layout_constraintBottom_toTopOf="@+id/tvVenueDetailsWelcome"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Ocean Drive Miami" />
+        tools:text="Ocean Drive Miami"
+        android:layout_marginBottom="6dp"/>
 
     <TextView
         android:id="@+id/tvVenueDetailsWelcome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:textColor="@color/login_light_gray"
-        android:textSize="11sp"
+        android:layout_marginStart="30dp"
+        android:fontFamily="@font/circularstd_medium"
+        android:textColor="@color/menu_black"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/tvVenueDetailsDescription"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="Welcome to Poké Bar" />
+        tools:text="Welcome to Poké Bar"
+        android:layout_marginBottom="6dp"/>
 
     <TextView
         android:id="@+id/tvVenueDetailsDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:textColor="@color/login_light_gray"
-        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="start"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textColor="@color/menu_gray"
+        android:textSize="13sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:fontFamily="@font/circularstd_medium"
         app:layout_constraintBottom_toTopOf="@+id/tvVenueDetailsOpen"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="12 Belgard Road, Tallaght, Miami" />
@@ -42,8 +52,8 @@
         android:id="@+id/tvVenueDetailsOpen"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginBottom="40dp"
         android:textColor="@color/login_light_gray"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,8 +68,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/tvVenueDetailsName"
-        android:contentDescription="VenueImage"
-        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/venueimage"
+        android:layout_marginBottom="30dp"
         android:scaleType="centerCrop"/>
 
     <TextView
@@ -68,10 +78,12 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="40dp"
-        android:layout_marginTop="20dp"
-        android:text="LOGOUT"
-        android:padding="10dp"
-        android:background="@color/white"/>
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/logout"
+        android:fontFamily="@font/circularstd_medium"
+        android:textAllCaps="false"
+        android:padding="12dp"
+        android:background="@drawable/logout_button_background"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

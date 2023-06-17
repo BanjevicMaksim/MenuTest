@@ -8,15 +8,16 @@ class SharedPreferencesManager(context: Context) {
     private var sharedPreferences = context.getSharedPreferences(PREFERENCES, MODE_PRIVATE)
 
     fun saveUserToken(token: String) {
-        sharedPreferences.edit().apply {
-            putString(USER_TOKEN, token)
-            apply()
-        }
+        setUserToken(token)
     }
 
     fun removeUserToken() {
+        setUserToken("")
+    }
+
+    private fun setUserToken(token: String) {
         sharedPreferences.edit().apply {
-            putString(USER_TOKEN, "")
+            putString(USER_TOKEN, token)
             apply()
         }
     }

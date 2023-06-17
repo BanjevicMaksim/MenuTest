@@ -31,7 +31,10 @@ class VenuesAdapter(
                 tvVenueName.text = venue.venue?.name
                 tvVenueDistance.text = getAmount(venue.distance)
                 tvVenueAddress.text = venue.venue?.address
-                tvVenueOpen.text = if (venue.venue?.isOpen == true) "Open" else "Closed"
+                tvVenueOpen.text =
+                    if (venue.venue?.isOpen == true)
+                        itemView.context.getString(R.string.Open)
+                    else context.getString(R.string.Close)
 
                 setOnClickListener {
                     onVenueClick(venue)

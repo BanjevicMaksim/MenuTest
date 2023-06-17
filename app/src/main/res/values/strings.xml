@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">MenuTest</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="the_easiest_way_to_order">The easiest way to order</string>
+    <string name="no_lines_no_waiting">No lines. No waiting.</string>
+    <string name="venueimage">VenueImage</string>
+    <string name="logout">Logout</string>
+    <string name="OK">OK</string>
+    <string name="Open">Open</string>
+    <string name="Close">Closed</string>
 </resources>

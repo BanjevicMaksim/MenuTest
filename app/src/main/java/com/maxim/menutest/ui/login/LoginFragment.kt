@@ -26,8 +26,9 @@ class LoginFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (viewModel.isUserLoggedIn()) navigateToVenues()
-        else {
+        if (viewModel.isUserLoggedIn()) {
+            navigateToVenues()
+        } else {
             observeLiveData()
             setOnClickListeners()
         }

@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.maxim.menutest.domain.model.VenueData
 import com.maxim.menutest.domain.use_case.GetVenuesUseCase
 import com.maxim.menutest.util.Response
+import com.maxim.menutest.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class VenuesViewModel(
@@ -16,18 +17,20 @@ class VenuesViewModel(
             return _ldVenues
         }
 
-    val ldLoading = MutableLiveData<Boolean>()
+    val ldLoading = SingleLiveEvent<Boolean>()
 
     fun getVenues() {
         ldLoading.value = true
         viewModelScope.launch {
-            getVenuesUseCase.invoke(latitude = "44.001783", longitude = "21.26907").also {
+            getVenuesUseCase.invoke(latitude = "44.001783", longitude = "21.26907").also { it ->
                 when (it) {
                     Response.Error.NoInternetError -> {
                         // Handle no internet error
                     }
                     is Response.Success -> {
-                        ldVenues.value = it.value.venues
+                        _ldVenues.value = it.value.venues.sortedBy { venue ->
+                            venue.distance
+                        }
                     }
                     else -> {
                         // Handle other cases

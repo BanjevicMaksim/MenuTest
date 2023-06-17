@@ -37,18 +37,27 @@ class VenuesFragment : Fragment() {
         observeLiveData()
     }
 
+    override fun onStop() {
+        super.onStop()
+        removeObservers()
+    }
+
 
     private fun observeLiveData() {
-        viewModel.ldVenues.observe(viewLifecycleOwner) { venues ->
-            setupVenueList(venues)
+        viewModel.ldVenues.observe(viewLifecycleOwner) {
+            setupVenueList(it)
         }
-
         viewModel.ldLoading.observe(viewLifecycleOwner) { show ->
             (activity as MainActivity).run {
                 if (show) showLoader()
                 else hideLoader()
             }
         }
+    }
+
+    private fun removeObservers() {
+        viewModel.ldVenues.removeObservers(viewLifecycleOwner)
+        viewModel.ldLoading.removeObservers(viewLifecycleOwner)
     }
 
     private fun setupVenueList(venues: List<VenueData>) {
@@ -59,6 +68,8 @@ class VenuesFragment : Fragment() {
             rvVenues.context,
             layout.orientation
         )
+        dividerItemDecoration.setDrawable(resources.getDrawable(R.drawable.divider_layer, null))
+
         rvVenues.addItemDecoration(dividerItemDecoration)
         rvVenues.adapter = VenuesAdapter(venues) { venue ->
             navigateToVenues(venue)

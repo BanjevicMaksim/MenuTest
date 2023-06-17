@@ -8,9 +8,6 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import okhttp3.Interceptor
-import okhttp3.Protocol
-import okhttp3.ResponseBody
-import retrofit2.HttpException
 import java.io.IOException
 
 /**

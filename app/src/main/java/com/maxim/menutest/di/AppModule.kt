@@ -78,32 +78,32 @@ val appModule = module {
     }
 
     // USE CASE
-    single {
+    factory {
         LoginUseCase(get())
     }
 
-    single {
+    factory {
         SaveUserTokenUseCase(get())
     }
 
-    single {
+    factory {
         GetVenuesUseCase(get())
     }
 
-    single {
+    factory {
         LogoutUseCase(get())
     }
 
     // VIEW MODEL
-    single {
+    factory {
         LoginViewModel(get(), get(), get())
     }
 
-    single {
+    factory {
         VenuesViewModel(get())
     }
 
-    single {
+    factory {
         VenueDetailsViewModel(get())
     }
 }

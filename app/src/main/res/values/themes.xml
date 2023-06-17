@@ -29,4 +29,8 @@
         <!-- Required -->
         <item name="postSplashScreenTheme">@style/Theme.MenuTest</item>
     </style>
+
+    <style name="MenuTextView" >
+        <item name="fontFamily">@font/circularstd_black</item>
+    </style>
 </resources>
