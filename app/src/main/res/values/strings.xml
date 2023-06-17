@@ -10,4 +10,6 @@
     <string name="OK">OK</string>
     <string name="Open">Open</string>
     <string name="Close">Closed</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="try_again">Try again later...</string>
 </resources>

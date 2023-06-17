@@ -15,7 +15,8 @@ class LoginUseCase(
         if (email.isEmpty()) return Response.Error.EmptyFieldError
 
         try {
-            return Response.Success(repository.loginUser(email, password).data)
+            val response = repository.loginUser(email, password)
+            return Response.Success(response.data)
         } catch (e: Exception) {
             return when (e) {
                 is HttpException -> {

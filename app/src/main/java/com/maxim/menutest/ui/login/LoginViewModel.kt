@@ -37,6 +37,7 @@ class LoginViewModel(
                 when (it) {
                     is Response.Success -> {
                         _ldLoginSuccess.value = it.value.token.value
+                        saveUserToken(it.value.token.value)
                     }
                     is Response.Error.HttpError -> {
                         _ldLoginError.value = it.error?.infoMessage
@@ -46,13 +47,14 @@ class LoginViewModel(
                     Response.Error.NoInternetError -> {
                         // Handle no internet error
                     }
+                    else -> {}
                 }
                 ldLoading.value = false
             }
         }
     }
 
-    fun saveUserToken(token: String) {
+    private fun saveUserToken(token: String) {
         saveUserTokenUseCase.invoke(token)
     }
 

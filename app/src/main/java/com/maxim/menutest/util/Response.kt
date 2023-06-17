@@ -8,6 +8,8 @@ sealed class Response<out T> {
         object EmptyFieldError : Error()
         object UnknownError : Error()
         object NoInternetError : Error()
+        object BadArguments : Error()
+
         data class HttpError(override val error: ErrorData? = null) : Error(error)
     }
 }

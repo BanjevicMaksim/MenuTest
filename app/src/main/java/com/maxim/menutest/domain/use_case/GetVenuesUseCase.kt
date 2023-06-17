@@ -32,6 +32,9 @@ class GetVenuesUseCase(
                     is NoNetworkException -> {
                         Response.Error.NoInternetError
                     }
+                    is java.lang.IllegalArgumentException -> {
+                        Response.Error.BadArguments
+                    }
                     else -> {
                         Response.Error.UnknownError
                     }

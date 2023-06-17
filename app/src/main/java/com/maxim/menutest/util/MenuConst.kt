@@ -13,4 +13,6 @@ object MenuConst {
     const val DISTANCE_KM = "km"
     const val DISTANCE_M = "m"
     const val VENUE = "VENUE"
+    const val VENUE_LONGITUDE = "21.26907"
+    const val VENUE_LATITUDE = "44.001783"
 }

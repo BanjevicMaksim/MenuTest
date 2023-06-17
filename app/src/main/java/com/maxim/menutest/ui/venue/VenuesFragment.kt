@@ -11,7 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.maxim.menutest.R
 import com.maxim.menutest.domain.model.VenueData
 import com.maxim.menutest.ui.MainActivity
+import com.maxim.menutest.util.InfoMessage
 import com.maxim.menutest.util.MenuConst.VENUE
+import com.maxim.menutest.util.showError
 import kotlinx.android.synthetic.main.fragment_venues.*
 import org.koin.android.ext.android.inject
 
@@ -47,6 +49,16 @@ class VenuesFragment : Fragment() {
         viewModel.ldVenues.observe(viewLifecycleOwner) {
             setupVenueList(it)
         }
+
+        viewModel.ldVenuesError.observe(viewLifecycleOwner) {
+            activity?.showError(
+                InfoMessage(
+                    getString(R.string.something_went_wrong),
+                    getString(R.string.try_again)
+                )
+            )
+        }
+
         viewModel.ldLoading.observe(viewLifecycleOwner) { show ->
             (activity as MainActivity).run {
                 if (show) showLoader()

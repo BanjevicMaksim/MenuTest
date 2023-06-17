@@ -47,7 +47,6 @@ class LoginFragment: Fragment() {
         }
 
         viewModel.ldLoginSuccess.observe(viewLifecycleOwner) { token ->
-            viewModel.saveUserToken(token)
             navigateToVenues()
         }
 
