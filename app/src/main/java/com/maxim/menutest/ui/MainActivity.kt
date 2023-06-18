@@ -69,6 +69,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun hideLoader() {
-        loader.hide()
+        loader.dismiss()
     }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.maxim.menutest.R
@@ -39,12 +40,6 @@ class VenuesFragment : Fragment() {
         observeLiveData()
     }
 
-    override fun onStop() {
-        super.onStop()
-        removeObservers()
-    }
-
-
     private fun observeLiveData() {
         viewModel.ldVenues.observe(viewLifecycleOwner) {
             setupVenueList(it)
@@ -67,11 +62,6 @@ class VenuesFragment : Fragment() {
         }
     }
 
-    private fun removeObservers() {
-        viewModel.ldVenues.removeObservers(viewLifecycleOwner)
-        viewModel.ldLoading.removeObservers(viewLifecycleOwner)
-    }
-
     private fun setupVenueList(venues: List<VenueData>) {
         val layout = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         rvVenues.layoutManager = layout
@@ -89,7 +79,7 @@ class VenuesFragment : Fragment() {
     }
 
     private fun navigateToVenues(venueData: VenueData) {
-        activity?.findNavController(R.id.fcvNavContainer)?.navigate(
+        findNavController().navigate(
             R.id.action_venuesFragment_to_venueDetailsFragment, Bundle().apply {
                 putParcelable(VENUE, venueData)
             }
