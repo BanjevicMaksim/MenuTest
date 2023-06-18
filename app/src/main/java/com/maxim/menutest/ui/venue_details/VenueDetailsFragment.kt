@@ -9,12 +9,15 @@ import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.maxim.menutest.R
+import com.maxim.menutest.databinding.FragmentVenueDetailsBinding
 import com.maxim.menutest.domain.model.VenueData
 import com.maxim.menutest.util.MenuConst.VENUE
-import kotlinx.android.synthetic.main.fragment_venue_details.*
 import org.koin.android.ext.android.inject
 
 class VenueDetailsFragment : Fragment() {
+
+    private var _binding: FragmentVenueDetailsBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: VenueDetailsViewModel by inject()
 
@@ -22,7 +25,10 @@ class VenueDetailsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_venue_details, container, false)
+    ): View {
+        _binding = FragmentVenueDetailsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,17 +40,17 @@ class VenueDetailsFragment : Fragment() {
 
     private fun setupViews() {
         val venueData = arguments?.getParcelable<VenueData>(VENUE)
-        tvVenueDetailsDescription.text = venueData?.venue?.description
-        tvVenueDetailsName.text = venueData?.venue?.name
-        tvVenueDetailsWelcome.text = venueData?.venue?.welcomeMessage
-        tvVenueDetailsOpen.text = venueData?.venue?.isOpen.toString()
+        binding.tvVenueDetailsDescription.text = venueData?.venue?.description
+        binding.tvVenueDetailsName.text = venueData?.venue?.name
+        binding.tvVenueDetailsWelcome.text = venueData?.venue?.welcomeMessage
+        binding.tvVenueDetailsOpen.text = venueData?.venue?.isOpen.toString()
 
         Glide.with(requireContext())
             .load(venueData?.venue?.image?.thumbnail)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
-            .into(ivVenueImage)
+            .into(binding.ivVenueImage)
 
-        btnLogout.setOnClickListener { viewModel.logoutUser() }
+        binding.btnLogout.setOnClickListener { viewModel.logoutUser() }
     }
 
     private fun observeLiveData() {

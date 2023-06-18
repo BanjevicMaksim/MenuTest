@@ -5,15 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.maxim.menutest.R
-import com.maxim.menutest.ui.MainActivity
+import com.maxim.menutest.databinding.FragmentLoginBinding
+import com.maxim.menutest.util.hideLoader
 import com.maxim.menutest.util.showError
-import kotlinx.android.synthetic.main.fragment_login.*
+import com.maxim.menutest.util.showLoader
 import org.koin.android.ext.android.inject
 
 
 class LoginFragment: Fragment() {
+
+    private var _binding: FragmentLoginBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: LoginViewModel by inject()
 
@@ -21,29 +25,30 @@ class LoginFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_login, container, false)
+    ): View {
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setOnClickListeners()
         if (viewModel.isUserLoggedIn()) {
             navigateToVenues()
         } else {
             observeLiveData()
-            setOnClickListeners()
         }
     }
 
     private fun navigateToVenues() {
-        activity?.findNavController(R.id.fcvNavContainer)?.navigate(R.id.action_loginFragment_to_venuesFragment)
+        findNavController().navigate(R.id.action_loginFragment_to_venuesFragment)
     }
 
     private fun observeLiveData() {
         viewModel.ldLoading.observe(viewLifecycleOwner) { show ->
-            (activity as MainActivity).run {
-                if (show) showLoader()
-                else hideLoader()
-            }
+            if (show) showLoader()
+            else hideLoader()
         }
 
         viewModel.ldLoginSuccess.observe(viewLifecycleOwner) { token ->
@@ -56,8 +61,8 @@ class LoginFragment: Fragment() {
     }
 
     private fun setOnClickListeners() {
-        btnSignIn.setOnClickListener {
-            viewModel.loginUser(etEmail.text.toString(), etPassword.text.toString())
+        binding.btnSignIn.setOnClickListener {
+            viewModel.loginUser(binding.etEmail.text.toString(), binding.etPassword.text.toString())
         }
     }
 }

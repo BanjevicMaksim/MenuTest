@@ -1,12 +1,11 @@
 package com.maxim.menutest.ui.venue
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.maxim.menutest.R
+import com.maxim.menutest.databinding.ItemVenueBinding
 import com.maxim.menutest.domain.model.VenueData
-import kotlinx.android.synthetic.main.item_venue.view.*
 
 class VenuesAdapter(
     private val venues: List<VenueData>,
@@ -15,7 +14,7 @@ class VenuesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VenueViewHolder =
         VenueViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_venue, parent, false)
+            ItemVenueBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         )
 
     override fun onBindViewHolder(holder: VenueViewHolder, position: Int) {
@@ -24,14 +23,15 @@ class VenuesAdapter(
 
     override fun getItemCount() = venues.size
 
-    inner class VenueViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class VenueViewHolder(private val binding: ItemVenueBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(venue: VenueData) {
             with(itemView) {
-                tvVenueName.text = venue.venue?.name
-                tvVenueDistance.text = getAmount(venue.distance)
-                tvVenueAddress.text = venue.venue?.address
-                tvVenueOpen.text =
+                binding.tvVenueName.text = venue.venue?.name
+                binding.tvVenueDistance.text = getAmount(venue.distance)
+                binding.tvVenueAddress.text = venue.venue?.address
+                binding.tvVenueOpen.text =
                     if (venue.venue?.isOpen == true)
                         itemView.context.getString(R.string.Open)
                     else context.getString(R.string.Close)
